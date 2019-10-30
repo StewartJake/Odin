@@ -1,27 +1,36 @@
 class Die
 
-    def roll
-        1 + rand(6)
+    def initialize
+        roll
     end
-    
-    def d20
-        1 + rand(20)
+
+    def roll
+        # why are instance variables camelCase
+        @numberShowing = 1 + rand(6)
+    end
+
+    def showing
+        @numberShowing
     end
 end
 
-dice = [Die.new, Die.new]
-d_twenty = Die.new
-dice.each do |die|
-    puts die.roll
-end
+# dice = [Die.new, Die.new]
+die_one = Die.new
+# dice.each do |die|
+#     puts die.roll
+# end
 
 input = ''
-while input != 'q'
-    input = gets
-    if input == 'q'
-        exit
+while !(input.eql? 'q')
+    input = gets.chomp
+    if input.eql? 'q'
+        exit(true)
+    elsif input.eql? "roll"
+        die_one.roll
+    elsif input.to_i == die_one.showing.to_i
+        puts "Lucky guess"
     else
-        puts d_twenty.d20
+        puts die_one.showing
     end
 end
 
